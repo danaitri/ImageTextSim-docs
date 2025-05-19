@@ -1,0 +1,902 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+        <link rel="next" href="configuration/">
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Image-Text Scoring Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#image-text-similarity" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="Image-Text Scoring Project" class="md-header__button md-logo" aria-label="Image-Text Scoring Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Image-Text Scoring Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Home
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Image-Text Scoring Project" class="md-nav__button md-logo" aria-label="Image-Text Scoring Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Image-Text Scoring Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#quick-links" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quick Links
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quick Links">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#experimental-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 Experimental Results
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      📚 Documentation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#project-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      🗂 Project Structure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#supported-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Supported Metrics
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#acknowledgements-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      Acknowledgements &amp; References
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contact" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contact
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configuration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Results
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Results
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="results/CLIPscore/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CLIP-score
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="results/BLIP2-itc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    BLIP2-score
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="results/ImageReward/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ImageReward
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="results/TIFA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    TIFA
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="results/metrics_report/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Metrics Report
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Pipeline
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="logging/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Logging
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="metrics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Metrics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Usage
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#quick-links" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quick Links
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quick Links">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#experimental-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 Experimental Results
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      📚 Documentation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#project-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      🗂 Project Structure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#supported-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Supported Metrics
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#acknowledgements-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      Acknowledgements &amp; References
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contact" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contact
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="image-text-similarity">Image-text similarity</h1>
+<hr />
+<p>This project implements pipeline for evaluating image-text alignment using state-of-the-art models.</p>
+<table>
+<thead>
+<tr>
+<th>Image</th>
+<th>Caption</th>
+<th>Score</th>
+<th>Model Type</th>
+<th>Questions</th>
+<th>Correct Answers</th>
+<th>Model Answers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img alt="" src="https://cdn.leonardo.ai/users/604cfbbb-25dc-4e07-998e-bcb92da145d3/generations/46babda8-86e6-480c-a43b-546e33d8fb20/Default_A_girl_studying_with_a_coffee_at_night_1.jpg" /></td>
+<td>A girl studying with a coffee at night</td>
+<td>0.666667</td>
+<td>tifa</td>
+<td>is this a girl? || who is studying with a coffee? || is there a coffee? || is the girl studying? || is this night? || is this night or day?</td>
+<td>yes || girl || yes || yes || yes || night</td>
+<td>no/no || man/man || yes/yes || yes/yes || yes/yes || night/night</td>
+</tr>
+<tr>
+<td><img alt="" src="https://cdn.leonardo.ai/users/b81d5101-fb09-4410-9f47-b8b9ed1335df/generations/176b3af7-3cb7-497d-8d8f-3bd14a7e4c01/Default_A_pile_of_bricks_on_the_floor_2.jpg" /></td>
+<td>A pile of bricks on the floor</td>
+<td>0.333333</td>
+<td>tifa</td>
+<td>is there a pile of bricks? || are there bricks? || is there a floor?</td>
+<td>yes || yes || yes</td>
+<td>no/no || no/no || yes/yes</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="quick-links">Quick Links</h2>
+<h3 id="experimental-results">📊 Experimental Results</h3>
+<ul>
+<li><a href="results/CLIPscore/">CLIPScore</a> - Text-image alignment score</li>
+<li><a href="results/BLIP2-itc/">BLIP2-ITC</a> - Image-text alignment score </li>
+<li><a href="results/ImageReward/">ImageReward</a> - Human preference predictions  </li>
+<li><a href="TIFA.md">TIFA</a> - Compositional image, text similarity</li>
+</ul>
+<h3 id="documentation">📚 Documentation</h3>
+<ul>
+<li>
+<p><strong>Configuration</strong><br />
+<a href="configuration/">Configuration</a> - YAML files, Type safety with pydantic</p>
+</li>
+<li>
+<p><strong>Data Pipeline</strong><br />
+<a href="pipeline/">Pipeline</a> - Data download, CSV reading, caching, distributed processing</p>
+</li>
+<li>
+<p><strong>Logging</strong><br />
+<a href="logging/">Monitoring &amp; Tracking</a> - Logging performance metrics, error metrics, score statistics, metadata</p>
+</li>
+<li>
+<p><strong>Methodologies</strong><br />
+<a href="metrics/">Metrics</a> - Model architectures, metrics &amp; implementations.</p>
+</li>
+<li>
+<p><strong>Usage</strong><br />
+<a href="usage/">Installation &amp; Run</a> - Environment setup &amp; code usage</p>
+</li>
+</ul>
+<hr />
+<h2 id="project-structure">🗂 Project Structure <a id="project-structure"></a></h2>
+<pre><code class="language-text">├── README.md
+├── conf/                           # Configuration files
+│   ├── __init__.py
+│   ├── config.yaml                 # Main config file
+│   └── model/                      # Model-specific configs
+├── data/
+│   ├── processed/                  # Processed outputs
+│   └── raw/                        # Raw input data
+├── requirements.txt
+├── setup.sh                        # Installation script
+└── src/                            # Source code
+│   ├── __init__.py
+│   ├── config/                     # Config handling
+│   ├── data_loading/               # Data pipeline
+│   ├── model/                      # Model implementations 
+│   ├── pipeline.py                 # Main entry point
+│   └── utils/                      # Helper functions
+└── docs/                           # Documentation
+    └── ...                         # Mkdocs site content
+</code></pre>
+<hr />
+<h2 id="supported-metrics">Supported Metrics</h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Model Type</th>
+<th>Speed (s/rec)</th>
+<th>GPU Memory (MB)</th>
+<th>Score Range</th>
+<th>Best For</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><a href="https://arxiv.org/abs/2104.08718">CLiPScore</a></strong></td>
+<td>Embedding-based</td>
+<td>0.033</td>
+<td>2313.43</td>
+<td>[0.23, 0.43]</td>
+<td>Quick filtering</td>
+</tr>
+<tr>
+<td><strong><a href="https://arxiv.org/abs/2301.12597">BLIP2</a></strong></td>
+<td>Embedding-based</td>
+<td>0.065</td>
+<td>4373.57</td>
+<td>[0.18, 0.46]</td>
+<td>Balanced evaluation</td>
+</tr>
+<tr>
+<td><strong><a href="https://arxiv.org/abs/2304.05977">ImageReward</a></strong></td>
+<td>Human Preference</td>
+<td>0.044</td>
+<td>2325.61</td>
+<td>[-2.05, 1.99]</td>
+<td>Human-like ranking</td>
+</tr>
+<tr>
+<td><strong><a href="https://arxiv.org/abs/2303.11897">TIFA</a></strong></td>
+<td>VQA</td>
+<td>23.077</td>
+<td>9815</td>
+<td>[0.0, 1.0]</td>
+<td>Fine-grained analysis</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<hr />
+<h2 id="acknowledgements-references">Acknowledgements &amp; References</h2>
+<table> <tr> <td align="center" width="80">📄</td> <td> <strong>TIFA (Text-Image Faithfulness Assessment)</strong><br> Implementation adapted from: <a href="https://github.com/Yushi-Hu/tifa">Official Repository</a><br> <em>Hu et al., TIFA: Accurate and Interpretable Text-to-Image Faithfulness Evaluation with Question Answering, 2023</em> </td> </tr> <tr> <td align="center" width="80"> <img src="https://github.com/salesforce/LAVIS/blob/main/docs/_static/logo_final.png?raw=true" width="30" alt="LAVIS"> </td> <td> <strong>BLIP-2 Image-Text Matching</strong><br> Implemented using <a href="https://github.com/salesforce/LAVIS">LAVIS Framework</a><br> <em>Li et al., BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models, 2023</em> </td> </tr> <tr> <td align="center" width="80">🤗</td> <td> <strong>CLIPScore Implementation</strong><br> Model weights via <a href="https://huggingface.co/openai/clip-vit-base-patch32">Hugging Face Hub</a><br> <em>Radford et al., Learning Transferable Visual Models From Natural Language Supervision, 2021</em> </td> </tr> <tr> <td align="center" width="80">📄</td> <td> <strong>ImageReward Implementation</strong><br> Adapted from <a href="https://github.com/THUDM/ImageReward">Original Implementation</a><br> <em>Xu et al., ImageReward: Learning and Evaluating Human Preferences for Text-to-Image Generation, 2023</em> </td> </tr> </table>
+
+<h2 id="contact">Contact</h2>
+<p>For any question, please contact danaitri22@gmail.com</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

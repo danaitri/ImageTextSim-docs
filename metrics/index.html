@@ -1,0 +1,971 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../logging/">
+      
+      
+        <link rel="next" href="../usage/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Metrics - Image-Text Scoring Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#metrics" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Image-Text Scoring Project" class="md-header__button md-logo" aria-label="Image-Text Scoring Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Image-Text Scoring Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Metrics
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Image-Text Scoring Project" class="md-nav__button md-logo" aria-label="Image-Text Scoring Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Image-Text Scoring Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configuration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Results
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Results
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../results/CLIPscore/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CLIP-score
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../results/BLIP2-itc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    BLIP2-score
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../results/ImageReward/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ImageReward
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../results/TIFA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    TIFA
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../results/metrics_report/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Metrics Report
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Pipeline
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../logging/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Logging
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Metrics
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Metrics
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      📍 Metrics
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📍 Metrics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-clipscore" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. CLIPScore
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-blip-2-itmitc" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. BLIP-2 (itm/itc)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-imagereward" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. ImageReward
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-tifa-vqa-based" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. TIFA (VQA-based)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cyclic-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔄 Cyclic Verification
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔄 Cyclic Verification">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#applying-cycle-consistency-in-our-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      Applying Cycle Consistency in Our Pipeline
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jina-clip-v2-for-long-captions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Jina CLIP v2 for Long Captions
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Usage
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      📍 Metrics
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📍 Metrics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-clipscore" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. CLIPScore
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-blip-2-itmitc" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. BLIP-2 (itm/itc)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-imagereward" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. ImageReward
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-tifa-vqa-based" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. TIFA (VQA-based)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cyclic-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔄 Cyclic Verification
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔄 Cyclic Verification">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#applying-cycle-consistency-in-our-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      Applying Cycle Consistency in Our Pipeline
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jina-clip-v2-for-long-captions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Jina CLIP v2 for Long Captions
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>Metrics</h1>
+
+<h2 id="metrics">📍 Metrics</h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Speed</th>
+<th>GPU Mem</th>
+<th>Human Correlation</th>
+<th>Compositional</th>
+<th>Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CLIPScore</td>
+<td>●●●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>First-pass filtering</td>
+</tr>
+<tr>
+<td>BLIP-2</td>
+<td>●●</td>
+<td>●●</td>
+<td>●●</td>
+<td>●●</td>
+<td>Balanced quality/speed</td>
+</tr>
+<tr>
+<td>ImageReward</td>
+<td>●●</td>
+<td>●</td>
+<td>●●●</td>
+<td>●</td>
+<td>Human preference optimization</td>
+</tr>
+<tr>
+<td>TIFA</td>
+<td>●</td>
+<td>●●●</td>
+<td>●●●</td>
+<td>●●●</td>
+<td>Interpretability, compositionality</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="1-clipscore"><strong>1. CLIPScore</strong></h3>
+<p><a href="https://arxiv.org/abs/2104.08718">CLiPScore</a> computes the cosine similarity between CLIP text and image embeddings.</p>
+<p><strong>Strengths:</strong></p>
+<ul>
+<li>Fast, lightweight, easy to integrate/implement.</li>
+</ul>
+<p><strong>Weaknesses:</strong></p>
+<ul>
+<li>Tends to overlook spatial relationships, missing objects and subtle attributes.</li>
+<li>Low fine-grained compositional accuracy.</li>
+<li>Lack of interpretability.</li>
+</ul>
+<p><strong>Best case</strong></p>
+<ul>
+<li>Provides a very coarse/broad alignment score.</li>
+<li>Can be used when computational cost is a concern.</li>
+</ul>
+<hr />
+<h3 id="2-blip-2-itmitc"><strong>2. BLIP-2 (itm/itc)</strong></h3>
+<p><a href="https://arxiv.org/abs/2301.12597">BLIP2-itm/itc</a> includes a frozen image encoder and a language Q-Former transformer, trained with Image-Text Contrastive learning (ITC) and Image-Text Matching objectives. In ITC mode, BLIP‑2 generates embeddings for image and text that are trained to have high cosine similarity for true pairs. In ITM mode, BLIP‑2 uses a cross‑modal attention head that outputs a match probability (logit) indicating whether the pair is aligned.</p>
+<p><strong>Strengths:</strong></p>
+<ul>
+<li>Inherits CLIP-like alignment ability with richer modeling.</li>
+<li>Captures more fine-grained details than CLIP.</li>
+<li>Cross‑attention mechanism provides a more direct match signal.</li>
+</ul>
+<p><strong>Weaknesses:</strong></p>
+<ul>
+<li>Still suffers from coarse-level limitations.</li>
+<li>Lack of interpretability.</li>
+</ul>
+<p><strong>Use case</strong></p>
+<ul>
+<li>Easy alternative to CLIP.</li>
+<li>Broad/coarse compatibility checks.</li>
+</ul>
+<hr />
+<h3 id="3-imagereward"><strong>3. ImageReward</strong></h3>
+<p><a href="https://arxiv.org/abs/2304.05977">ImageReward</a> is a learned reward model using a BLIP encoder (ViT‑L image encoder + transformer text encoder) as backbone, with a small MLP head to regress to human preference scores.</p>
+<p><strong>Strengths:</strong></p>
+<ul>
+<li>Directly trained with human feedback; closely aligned with human judgments.</li>
+<li>Implicitly learns both fidelity and aesthetic preferences.</li>
+<li>Generally outperforms CLIP and BLIP‑2 scores as a filter.</li>
+</ul>
+<p><strong>Weaknesses:</strong></p>
+<ul>
+<li>Can inherit biases from annotators/datasets.</li>
+<li>Encodes broad human preference factors beyond strict prompt fidelity.</li>
+</ul>
+<p><strong>Use case</strong></p>
+<ul>
+<li>Optimizing for human-preferred outputs.</li>
+<li>Combine with other metrics for pure semantic faithfulness.</li>
+</ul>
+<hr />
+<h3 id="4-tifa-vqa-based"><strong>4. TIFA (VQA-based)</strong></h3>
+<p><a href="https://arxiv.org/abs/2303.11897">TIFA</a> is a fine‑grained, interpretable faithfulness metric. Unlike embedding‑based scores, TIFA uses Visual Question Answering (VQA) to check consistency between the prompt and image.</p>
+<p><strong>Process:</strong>
+1. Generate question–answer pairs from the prompt via an LLM.
+2. Use a VQA model (e.g., BLIP‑2 or mPLUG) to answer those questions on the image.
+3. Compute accuracy of VQA answers as the TIFA score.</p>
+<p><strong>Strengths:</strong></p>
+<ul>
+<li>Explicitly checks every relevant detail of the prompt.</li>
+<li>Handles object counts, attributes, and spatial relations.</li>
+<li>Correlates strongly with human judgments on faithfulness.</li>
+<li>Focuses on factual coverage, not aesthetics.</li>
+</ul>
+<p><strong>Weaknesses:</strong></p>
+<ul>
+<li>Computationally intensive.</li>
+<li>Quality depends on underlying VQA system.</li>
+</ul>
+<p><strong>Use case</strong></p>
+<ul>
+<li>Prioritize faithfulness to the prompt.</li>
+<li>Detailed interpretability and high human correlation.</li>
+<li>Best for prompts with multiple objects, relations, or numeric attributes.</li>
+</ul>
+<hr />
+<h3 id="summary">Summary</h3>
+<ul>
+<li>Each metric trades off speed, memory, interpretability, and compositional accuracy.</li>
+<li><strong>CLIPScore</strong> &amp; <strong>BLIP‑2 (ITC)</strong>: fast screening, coarse alignment.</li>
+<li><strong>BLIP‑2 (ITM)</strong>: calibrated match probability, still coarse.</li>
+<li><strong>ImageReward</strong>: strongest human‑preference signal.</li>
+<li><strong>TIFA</strong>: highest faithfulness, interpretability.</li>
+</ul>
+<p><strong>Practical approach</strong>: use CLIP/BLIP for initial filtering, then apply <strong>TIFA</strong> or <strong>ImageReward</strong> on top candidates for fine‑grained judgment.</p>
+<hr />
+<h2 id="cyclic-verification">🔄 Cyclic Verification</h2>
+<p>A powerful way to evaluate and reinforce cross‑modal alignment is to enforce <strong>cycle consistency</strong>:</p>
+<ol>
+<li>Start with an original text prompt <code>T1</code>.</li>
+<li>Generate an image <code>I = Gen(T1)</code>.</li>
+<li>Caption that image to obtain <code>T2 = Cap(I)</code>.</li>
+<li>Ideally, <code>T2</code> should match <code>T1</code>.</li>
+</ol>
+<p><strong>Benefits of cyclic verification:</strong></p>
+<ul>
+<li><strong>Reference‑free evaluation:</strong> No need for human‑written reference captions; the cycle itself provides supervision.  </li>
+<li><strong>Modality gap mitigation:</strong> Aligns text‑to‑image and image‑to‑text mappings, ensuring semantic fidelity both ways.  </li>
+<li><strong>Fine‑grained feedback:</strong> Any missing details or hallucinations become evident when <code>T2</code> differs from <code>T1</code>.</li>
+</ul>
+<h3 id="applying-cycle-consistency-in-our-pipeline">Applying Cycle Consistency in Our Pipeline</h3>
+<ul>
+<li><strong>Text → Image:</strong> Use a text‑to‑image model (e.g. Stable Diffusion) to compute <code>I = Gen(T1)</code>.  </li>
+<li><strong>Image → Text:</strong> Use a captioning model (e.g. BLIP‑2) to compute <code>T2 = Cap(I)</code>.  </li>
+<li><strong>Comparison:</strong> Measure similarity between <code>T1</code> and <code>T2</code>, either at the token level (e.g., edit distance) or embedding level (e.g., cosine similarity).</li>
+</ul>
+<p>This <strong>cyclic metric</strong> can be added as an optional post‑processing step to flag cases where the round‑trip reconstruction deviates significantly.</p>
+<h2 id="jina-clip-v2-for-long-captions">Jina CLIP v2 for Long Captions</h2>
+<p>For our <strong>CLIPScore</strong> implementation, we adopt <strong>jinaai/jina-clip-v2</strong>, a contrastive vision‑language model specifically designed to handle long or truncated text inputs via <strong>Matryoshka representations</strong> and <strong>vector truncation</strong>. Jina CLIP v2 extends the maximum token length up to thousands of tokens (8192 in its text tower) by:</p>
+<ol>
+<li><strong>Multi‑stage contrastive training</strong> on text–text and text–image pairs, including longer synthetic captions :contentReference.</li>
+<li><strong>Matryoshka representations</strong>: Enables dynamic truncation of embedding dimensions (down to 64) to trade off performance vs. storage.</li>
+<li><strong>High image resolution support</strong> (512×512) for better fine‑grain visual features. </li>
+</ol>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>
