@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-     
+    
       
       
         <link rel="prev" href="../results/metrics_report/">
@@ -1044,9 +1044,9 @@ pipeline.run()
 <p>Index Mode Detection</p>
 <p>Pipeline switches to index mode when detects:</p>
 <ul>
-<li>Annoy index file (.ann)</li>
-<li>Embedding numpy array (.npy)</li>
-<li>Metadata mapping (.jsonl)</li>
+<li>Annoy index file <strong>(.ann) </strong></li>
+<li>Embedding numpy array <strong>(.npy) </strong></li>
+<li>Metadata mapping <strong>(.jsonl) </strong></li>
 </ul>
 <pre><code class="language-text">  cache_dir/
   ├── annoy_indices/
@@ -1060,7 +1060,7 @@ pipeline.run()
 <hr />
 <h3 id="configuration-hooks-extension-points">Configuration Hooks</h3>
 <ul>
-<li>Batch Size: config.model.batch_size controls number of examples per GPU inference call.</li>
+<li>Batch Size: config.model.batch_size controls the number of examples per GPU inference call.</li>
 <li>Concurrency:</li>
 <li><strong>Single‑node:</strong> config.app.max_connections for HTTP client concurrency.</li>
 <li><strong>Ray:</strong> <code>config.app.ray_workers</code> and <code>config.app.num_gpus.</code></li>
