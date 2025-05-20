@@ -944,15 +944,15 @@
 </ul>
 <p><strong>2. Component Initialization</strong></p>
 <ul>
-<li>CSV Reader: ChunkedCSVReader for streaming large files.
- -Cache Manager: CacheManager with TTL based on app.cache_dir &amp; app.ttl_days.
- -Model: Created via ModelFactory.create_model(config.model).</li>
+<li>CSV Reader: ChunkedCSVReader for streaming large files. </li>
+ <li>Cache Manager: CacheManager with TTL based on app.cache_dir &amp; app.ttl_days. </li>
+<li>Model: Created via ModelFactory.create_model(config.model).</li>
 <li>Logger &amp; Metrics: setup_logger + MetricsLogger to track throughput, errors, GPU usage, and score distributions.</li>
 <li>CSV Writer: CSVWriter outputs to output.path with dynamic ${model.type} replacement.</li>
 </ul>
 <p><strong>3. Process Loop</strong></p>
 <p>Iterate over CSV chunks → split into batches → download/cache images → load &amp; validate → score via model → record &amp; write results.</p>
-<p>**3. Cleanup **
+<p><strong> Cleanup </strong></p>
 Close cache, writer; write metrics JSON &amp; score distribution plot; flush logs.</p>
 <hr />
 <h2 id="imagetextpipeline"><code>ImageTextPipeline</code></h2>
@@ -1035,10 +1035,11 @@ pipeline.run()
 </ul>
 <h4 id="3-processing">3. Processing</h4>
 <p>For each CSV chunk:
-- Split into batches
-- Dispatch worker.score_batch.remote(batch)
-- ray.get() to collect results
-- Write &amp; log via CSVWriter and MetricsLogger</p>
+<ul>
+<li>Split into batches</li>
+<li>Dispatch worker.score_batch.remote(batch)</li>
+<li>ray.get() to collect results</li>
+<li>Write &amp; log via CSVWriter and MetricsLogger</li></ul></p>
 <h4 id="4-annoy-index-integration-optional">4. <a href="https://pypi.org/project/annoy/1.0.3/">Annoy</a> Index Integration (optional)</h4>
 <p>Index Mode Detection</p>
 <p>Pipeline switches to index mode when detects:</p>
@@ -1057,7 +1058,7 @@ pipeline.run()
 </code></pre>
 <p>If found, score_batch uses <code>_score_with_inde</code>; else <code>_score_with_inference.</code></p>
 <hr />
-<h3 id="configuration-hooks-extension-points">Configuration Hooks &amp; Extension Points</h3>
+<h3 id="configuration-hooks-extension-points">Configuration Hooks</h3>
 <ul>
 <li>Batch Size: config.model.batch_size controls number of examples per GPU inference call.</li>
 <li>Concurrency:</li>
