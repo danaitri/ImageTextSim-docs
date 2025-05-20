@@ -906,15 +906,19 @@
 </ul>
 <p>This <strong>cyclic metric</strong> can be added as an optional post‑processing step to flag cases where the round‑trip reconstruction deviates significantly.</p>
 <h2 id="jina-clip-v2-for-long-captions">Jina CLIP v2 for Long Captions</h2>
-<p>For our <strong>CLIPScore</strong> implementation, we adopt <strong>jinaai/jina-clip-v2</strong>, a contrastive vision‑language model specifically designed to handle long or truncated text inputs via <strong>Matryoshka representations</strong> and <strong>vector truncation</strong>. Jina CLIP v2 extends the maximum token length up to thousands of tokens (8192 in its text tower) by:</p>
-<ol>
-<li><strong>Multi‑stage contrastive training</strong> on text–text and text–image pairs, including longer synthetic captions :contentReference.</li>
-<li><strong>Matryoshka representations</strong>: Enables dynamic truncation of embedding dimensions (down to 64) to trade off performance vs. storage.</li>
-<li><strong>High image resolution support</strong> (512×512) for better fine‑grain visual features. </li>
+<p>For our <strong>CLIPScore</strong> implementation, we adopt <strong>jinaai/jina-clip-v2</strong>, a contrastive vision‑language model specifically designed to handle long or truncated text inputs via <strong>Matryoshka representations</strong>.
+<li><strong>Supports multilingual understanding with training in 29 languages.</li>
+<li><strong>Handles complex visual content using progressively higher image resolutions.</li>
+<li><strong> Matryoshka representations: Enables dynamic truncation of embedding dimensions. </li>
 </ol>
 <hr />
 
-
+<ul>
+<li>Input Length: Supports up to **8192 tokens** for text (vs 77 in standard CLIP).  </li>
+<li>Encoder: Jina-XLM-RoBERTa with RoPE and FlashAttention for long texts.  </li>
+<li>Training: Exposed to long captions and documents in training stages.   </li>
+  <li>Representation: Embeddings are robust and compressible via Matryoshka learning.  </li>
+</ul>
 
 
 
