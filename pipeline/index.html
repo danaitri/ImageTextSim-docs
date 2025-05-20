@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-      
+     
       
       
         <link rel="prev" href="../results/metrics_report/">
@@ -1031,15 +1031,15 @@ pipeline.run()
 <h4 id="2-ray-setup">2. Ray Setup</h4>
 <ul>
 <li><code>ray.init(num_gpus=config.app.num_gpus)</code></li>
-<li>Create <code>app.num_gpus</code> workers via @ray.remote(num_gpus=1)</li>
+<li>Create <code>app.num_gpus</code> workers via <code> @ray.remote(num_gpus=1) </code></li>
 </ul>
 <h4 id="3-processing">3. Processing</h4>
 <p>For each CSV chunk:
 <ul>
 <li>Split into batches</li>
-<li>Dispatch worker.score_batch.remote(batch)</li>
-<li>ray.get() to collect results</li>
-<li>Write &amp; log via CSVWriter and MetricsLogger</li></ul></p>
+<li>Dispatch <code> worker.score_batch.remote(batch) </code></li>
+<li><code> ray.get() </code>to collect results</li>
+<li>Write &amp; log via <code>CSVWriter </code> and <code>MetricsLogger </code></li></ul></p>
 <h4 id="4-annoy-index-integration-optional">4. <a href="https://pypi.org/project/annoy/1.0.3/">Annoy</a> Index Integration (optional)</h4>
 <p>Index Mode Detection</p>
 <p>Pipeline switches to index mode when detects:</p>
